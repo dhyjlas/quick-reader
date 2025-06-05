@@ -4,7 +4,8 @@
     class="container"
     tabindex="0"
     @wheel="handleWheel"
-    @keyup="handleKeyup"
+    @keydown="handleKeydown"
+    @mousedown="handleMouseDown"
   >
     <div class="text">{{ display }}</div>
     <div class="buttons">
@@ -30,7 +31,7 @@ export default {
       filePath: '',
       config: {
         page: 0,
-        rule: '第.*章|.*章:'
+        rule: ''
       },
       list: [],
       position: 0
@@ -38,12 +39,19 @@ export default {
   },
   mounted() {},
   methods: {
-    handleKeyup(event) {
-      console.log(event.key)
-      if (event.key === 'q') {
+    handleMouseDown(event) {
+      if (event.button === 1) {
+        this.display = ''
+      }
+    },
+    handleKeydown(event) {
+      if (event.key === 'd') {
         this.config.page += this.size
-      } else if (event.key === 'w') {
+      } else if (event.key === 's') {
         this.config.page -= this.size
+      } else if (event.key === 'a') {
+        this.display = ''
+        return
       } else {
         return
       }
