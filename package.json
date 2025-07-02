@@ -6,8 +6,6 @@
   "author": "example.com",
   "homepage": "https://electron-vite.org",
   "build": {
-    "compression": "maximum",
-    "asar": true,
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true

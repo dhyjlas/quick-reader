@@ -23,7 +23,6 @@
 export default {
   data() {
     return {
-      size: 40,
       selectedFile: '',
       error: '',
       content: '',
@@ -31,6 +30,7 @@ export default {
       filePath: '',
       config: {
         page: 0,
+        size: 40,
         rule: ''
       },
       list: [],
@@ -46,9 +46,9 @@ export default {
     },
     handleKeydown(event) {
       if (event.key === 'd') {
-        this.config.page += this.size
+        this.config.page += this.config.size
       } else if (event.key === 's') {
-        this.config.page -= this.size
+        this.config.page -= this.config.size
       } else if (event.key === 'a') {
         this.display = ''
         return
@@ -59,16 +59,16 @@ export default {
     },
     async handleWheel(event) {
       if (event.deltaY > 0) {
-        this.config.page += this.size
+        this.config.page += this.config.size
       } else if (this.config.page > 0) {
-        this.config.page -= this.size
+        this.config.page -= this.config.size
       } else {
         return
       }
       this.pageChange()
     },
     async pageChange() {
-      this.display = this.content.substring(this.config.page, this.config.page + this.size)
+      this.display = this.content.substring(this.config.page, this.config.page + this.config.size)
       await window.api.writeFile({
         filePath: this.filePath + '.config',
         content: JSON.stringify(this.config)
@@ -97,10 +97,11 @@ export default {
       } else {
         this.config = {
           page: 0,
+          size: 40,
           rule: '第.*章|.*章:'
         }
       }
-      this.display = this.content.substring(this.config.page, this.config.page + this.size)
+      this.display = this.content.substring(this.config.page, this.config.page + this.config.size)
       this.findAllMatches()
     },
     findAllMatches() {
@@ -125,7 +126,7 @@ export default {
     },
     change(event) {
       this.config.page = Number(event.target.value)
-      this.display = this.content.substring(this.config.page, this.config.page + this.size)
+      this.display = this.content.substring(this.config.page, this.config.page + this.config.size)
     },
     setPosition() {
       if (this.list.length <= 0) {
@@ -156,12 +157,12 @@ export default {
 .button {
   padding: 5px 10px 5px 0;
   cursor: pointer;
-  background-color: #1f1f1f;
+  background-color: var(--ev-c-black);
   color: var(--ev-c-text-2);
 }
 .cata {
   padding: 5px 10px 5px 0;
-  background-color: #1f1f1f;
+  background-color: var(--ev-c-black);
   color: var(--ev-c-text-2);
   height: 35px;
   width: 20px;

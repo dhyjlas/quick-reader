@@ -10,8 +10,6 @@ function createWindow() {
     height: 40,
     show: false,
     frame: false,
-    minHeight: 40,
-    maxHeight: 40,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -22,6 +20,7 @@ function createWindow() {
     }
   })
 
+  mainWindow.setOpacity(0.6)
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
