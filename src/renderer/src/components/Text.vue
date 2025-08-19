@@ -114,9 +114,10 @@ export default {
         let match
         while ((match = regex.exec(line)) !== null) {
           const globalPosition = globalIndex + match.index
+          const text = line.length > 32 ? line.substring(0, 32) + '...' : line
           matches.push({
             position: globalPosition,
-            text: line.replaceAll('\r', '')
+            text: text.replaceAll('\r', '')
           })
         }
         globalIndex += line.length + 1
